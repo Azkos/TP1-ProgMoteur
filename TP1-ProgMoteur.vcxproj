@@ -19,9 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TP1-ProgMoteur.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="TP1-ProgMoteur.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
