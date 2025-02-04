@@ -40,10 +40,10 @@ int main(int argc, char* argv[])
         } else if (command == "build")
         {
 
-            std::string command_line = ".\\Engine\\Build\\BatchFiles\\Build.bat " + project_name + " Win64 Development " + project_path + " -waitmutex";
+            std::string command_line = ".\\Engine\\Build\\BatchFiles\\Build.bat " + project_name + "Editor Win64 Development " + project_path + " -waitmutex";
 
             std::cout << command_line << '\n';
-
+            
             if (std::system(command_line.c_str()))
             {
                 std::cout << "Command line error\n";
