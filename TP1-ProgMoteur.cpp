@@ -2,7 +2,6 @@
 #include <iostream>
 #include <json/json.h>
 #include <windows.h>
-#include <filesystem>
 
 std::string get_file_name(const std::string& file_path)
 {
@@ -40,8 +39,6 @@ int main(int argc, char* argv[])
             }
         } else if (command == "build")
         {
-            STARTUPINFO si;
-            PROCESS_INFORMATION pi;
 
             std::string command_line = ".\\Engine\\Build\\BatchFiles\\Build.bat " + project_name + " Win64 Development " + project_path + " -waitmutex";
 
@@ -54,7 +51,15 @@ int main(int argc, char* argv[])
             
         } else if (command == "package")
         {
-            
+
+            // -ScriptsForProject=C:/Users/Yvain/UE5.5/UnrealEngine/TestSource/TestSource.uproject BuildCookRun -project=C:/Users/Yvain/UE5.5/UnrealEngine/TestSource/TestSource.uproject -noP4 -clientconfig=Development -serverconfig=Development -nocompileeditor -unrealexe=C:\Users\Yvain\UE5.5\UnrealEngine\Engine\Binaries\Win64\UnrealEditor-Cmd.exe -utf8output -platform=Win64 -build -cook -map=ThirdPersonMap+ThirdPersonMap -CookCultures=fr -unversionedcookedcontent -stage -package -cmdline="ThirdPersonMap -Messaging" -addcmdline="-SessionId=DFC0C1C74948523AD87B90BC0F0230BD -SessionOwner='Yvain' -SessionName='Build1'   "
+            std::string archive_path = argv[3];
+            std::string command_line = ".\\Engine\\Build\\BatchFiles\\RunUAT.bat -ScriptsForProject="+ project_path +" BuildCookRun -project="+ project_path +" -noP4 -clientconfig=Development -serverconfig=Development -nocompileeditor -unrealexe=UnrealEditor-Cmd.exe -utf8output -platform=Win64 -build -cook -map=ThirdPersonMap+ThirdPersonMap -CookCultures=fr -unversionedcookedcontent -stage -package -cmdline=\"ThirdPersonMap -Messaging\" -addcmdline=\"-SessionId=DFC0C1C74948523AD87B90BC0F0230BD -SessionOwner='Yvain' -SessionName='Build1'\" -archive -archivedirectory="+archive_path;
+
+            if (std::system(command_line.c_str()))
+            {
+                std::cout << "Command line error\n";
+            }
         } else
         {
             std::cout << argc << '\n';
